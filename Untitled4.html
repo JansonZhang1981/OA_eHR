@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<script>
+   function chktable() {
+	   
+      
+                var flag = true;
+                var data = "";
+                data += " <table width='750' border='1' cellspacing='0' cellpadding='0' class='pagetab' align='left'>";
+                data += "  <tr class='header'>" +
+                            "<td align='center' width='30' >期次</td>" +
+                            "<td align='center' >还款方式</td>" +
+                            "<td  align='center '>各期金额</td>" +
+                            "<td align='center' width='80' >利率</td>" +
+                            "<td align='center' width='100' >计划还款日期</td>" +
+                            "<td align='center'  width='150px'>备注</td>" +
+                        "</tr>" ;
+
+                data += "  <tr class='header'>";
+                data += "<td>&nbsp;</td>";
+                data += "<td>&nbsp;</td>";
+                data += "<td>&nbsp</td>";
+                data += "<td align='right'></td>";
+                data += "<td align='right'></td>";
+                data += "<td>&nbsp;</td>";
+                data += "</tr>";
+                data += "</table>";
+                document.getElementById("div1").style.display = "block";
+                document.getElementById("table1").innerHTML = data;
+        }
+		</script>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+<body scroll="yes">  
+     <form id="addfrm" name="addfrm" action="" method="post" onsubmit="return chkForm(this,'errmsg')">  
+            <input type="hidden" name="subflag" value="1">  
+            <input name="" type="button" value=" 生成 " class="buttton" onclick="chktable()"/></br>  
+            </br>  
+            <div id="div1" style="display: none" mce_style="display: none">  
+            <div id="table1"></div>  
+            <input name="" type="submit" value=" 保存 " class="buttton"/></br>  
+            </div>  
+            <div id="errmsg" class="formmsg">提示信息</div>  
+            </form>  
+</body>  
+</html>

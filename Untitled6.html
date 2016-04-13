@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<script language=vbscript>
+Dim fname
+Function read_xls()
+	fname =document.getElementById("file1").value
+	
+		If fname<>"" Then
+	
+		Set   ExcelApp  =  CreateObject("Excel.Application")      '创建EXCEL对象   
+		Set   ExcelBook =  ExcelApp.Workbooks.open(fname)
+		Set   ExcelSheet   =   ExcelBook.Worksheets(1)
+		msgbox ExcelSheet.Range("A1").Value
+	else
+       msgbox "请选择文件"
+    End if
+    
+
+End Function
+
+Function test()
+	msgbox document.getElementById("file1").value
+End Function
+
+Function ado_xls()
+	constr  = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" & fname & ";Extended Properties=""Excel 8.0;HDR=yes;IMEX=2"""
+	 sqlstr="select * from [Sheet1$] where 员工号 <>'' "
+	 Set adoconn = CreateObject("adodb.Connection")
+	 adoconn.Open constr
+
+	 dim rst
+	set rst=WScript.CreateObject("ADODB.Recordset")
+	 rst.open sqlstr,adoconn,1,1
+	i = rst.RecordCount    
+msgbox i
+
+End function
+
+Function   chktable() 
+                Dim data
+				data=""
+                data = data &  " <table width='750' border='1' cellspacing='0' cellpadding='0' class='pagetab' align='left'>"
+                data = data &  "  <tr class='header'>" &_
+                            "<td align='center' width='30' >期次</td>" &_
+                            "<td align='center' >还款方式</td>" &_
+                            "<td  align='center '>各期金额</td>" &_
+                            "<td align='center' width='80' >利率</td>" &_
+                            "<td align='center' width='100' >计划还款日期</td>" &_
+                            "<td align='center'  width='150px'>备注</td>" &_
+                        "</tr>" 
+
+                data = data &  "  <tr class='header'>"
+                data = data &  "<td>&nbsp;</td>"
+                data = data &  "<td>&nbsp;</td>"
+                data = data &  "<td>&nbsp</td>"
+                data = data &  "<td align='right'></td>"
+                data = data &  "<td align='right'></td>"
+                data = data &  "<td>&nbsp;</td>"
+                data = data &  "</tr>"
+                data = data &  "</table>"
+                document.getElementById("div1").style.display = "block"
+                document.getElementById("table1").innerHTML = data
+  End function
+
+</script>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+<body scroll="yes">  
+     <form id="addfrm" name="addfrm" action="" method="post" onsubmit="return chkForm(this,'errmsg')">  
+	 <input id="file1" type="file" name="file" /> 
+            <input type="hidden" name="subflag" value="1">  
+            <input name="" type="button" value=" 生成 " class="buttton" onclick="ado_xls()"/></br>  
+            </br>  
+            <div id="div1" style="display: none" mce_style="display: none">  
+            <div id="table1"></div>  
+            <input name="" type="submit" value=" 保存 " class="buttton"/></br>  
+            </div>  
+            <div id="errmsg" class="formmsg">提示信息</div>  
+            </form>  
+</body>  
+</html>
